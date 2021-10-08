@@ -9,7 +9,9 @@
     "server": "nodemon index.js",
     "start": "nodemon index.js",
     "reset": "npm run rollback && npm run migrate && npm run seed",
-    "seed": "knex seed:run"
+    "seed": "knex seed:run",
+    "up": "knex migrate:up",
+    "down": "knex migrate:down"
   },
   "repository": {
     "type": "git",
