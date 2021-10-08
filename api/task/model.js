@@ -3,8 +3,10 @@ const db = require('../../data/dbConfig')
 
 const getAll = () => {
     return db('tasks')
-    // .join('projects', 'tasks.project_id', 'projects.project_id')
-    .select('task_description', 'task_notes', 'task_completed')
+    .join('projects', 'tasks.project_id', 'projects.project_id')
+    .select('task_description', 'task_notes', 'task_completed', 'project_name', 'project_description')
+
+    //return db('tasks').select('task_description', 'task_notes', 'task_completed')
 }
 
 async function createTask(task) {
