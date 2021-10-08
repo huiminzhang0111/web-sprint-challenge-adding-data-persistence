@@ -3,7 +3,8 @@ const db = require('../../data/dbConfig')
 const validateProjectId = async (req, res, next) => {
     try {
         const existing_project_id = await db('projects')
-            .where('project_id', req.params.project_id)
+            .select('project_id')
+            .where('project_id', req.body.project_id)
             .first()
         
         if (!existing_project_id) {

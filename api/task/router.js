@@ -22,6 +22,11 @@ router.get('/', async (req, res, next) => {
 router.post('/', validateProjectId, (req, res, next) => {
     Task.createTask(req.body)
         .then(task => {
+            if (task.task_completed === 0) {
+                task.task_completed = false
+            } else {
+                task.task_completed = true
+            }
             res.status(201).json(task)
         }).catch(next)
 })
