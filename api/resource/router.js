@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
 //[POST] /api/resources
 router.post('/', (req, res, next) => {
-    Resource.create({resource_name: req.body.resource_name, resource_description: req.body.resource_description})
+    Resource.createResource(req.body)
         .then(resource => {
             res.status(201).json(resource)
         }).catch(next)
