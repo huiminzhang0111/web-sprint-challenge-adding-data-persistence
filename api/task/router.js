@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    Task.createTask({task_description: req.body.task_description, task_notes: req.body.task_notes, task_completed: req.body.task_completed})
+    Task.createTask(req.body)
         .then(task => {
             res.status(201).json(task)
         }).catch(next)
