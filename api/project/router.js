@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    Project.create({project_name: req.body.project_name, project_description: req.body.project_description, project_completed: req.body.project_completed})
+    Project.createProject(req.body)
         .then(project => {
             res.status(201).json(project)
         }).catch(next)
