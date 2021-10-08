@@ -21,6 +21,11 @@ router.get('/', async (req, res, next) => {
 router.post('/', (req, res, next) => {
     Project.createProject(req.body)
         .then(project => {
+            if (project.project_completed === 0) {
+                project.project_completed = false
+            } else {
+                project.project_completed = true
+            }
             res.status(201).json(project)
         }).catch(next)
 })

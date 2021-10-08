@@ -1,18 +1,22 @@
 const db = require('../../data/dbConfig')
-const Task = require('./model')
 
-async function checkProjectId(req, res, next) {
+const validateProjectId = async (req, res, next) => {
     try {
-        const possibleTask = await Task.getById(req.params.task_id)
-        if (possibleTask) {
-            req.task = possibleTask
-            next()
+        const existing_project_id = await db('projects')
+            .where('project_id', req.params.project_id)
+            .first()
+        
+        if (!existing_project_id) {
+            next({
+                status: 404,
+                message: "project_id not found"
+            })
         } else {
-            next({ status: 404, message: "project_id is required" })
+            next()
         }
-    } catch (err) {
+    }catch (err) {
         next(err)
     }
 }
 
-module.export = { checkProjectId }
+module.exports = { validateProjectId }

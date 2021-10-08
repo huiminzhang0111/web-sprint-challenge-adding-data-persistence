@@ -1,7 +1,7 @@
 // build your `/api/tasks` router here
 const router = require('express').Router()
 const Task = require('./model')
-const { checkProjectId } = require('./middleware')
+const { validateProjectId } = require('./middleware')
 
 router.get('/', async (req, res, next) => {
     try {
@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', validateProjectId, (req, res, next) => {
     Task.createTask(req.body)
         .then(task => {
             res.status(201).json(task)

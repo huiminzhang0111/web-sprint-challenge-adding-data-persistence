@@ -9,15 +9,9 @@ const getAll = () => {
     //return db('tasks').select('task_description', 'task_notes', 'task_completed')
 }
 
-const getById = id => {
-    return db('tasks')
-    .where('task_id', id)
-    .first()
-}
-
 async function createTask(task) {
     const [task_id] = await db('tasks').insert(task)
     return getAll().where({ task_id }).first()
 }
 
-module.exports = { getAll, createTask, getById }
+module.exports = { getAll, createTask }
